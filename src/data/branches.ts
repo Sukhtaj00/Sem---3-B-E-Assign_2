@@ -1,4 +1,4 @@
-import { branches } from "src/models/branches"
+import { branches } from "src/api/v1/models/branches"
  
 /**
 * exporting a array with all the sample branch data
