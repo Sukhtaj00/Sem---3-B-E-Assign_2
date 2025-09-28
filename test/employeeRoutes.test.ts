@@ -18,7 +18,7 @@ describe("Employee Routes", () => {
     });
 
     describe("GET /api/v1/routes/", () => {
-        it("should getAllEmployees controller", async () => {
+        it("should call getAllEmployees controller", async () => {
             await request(app).get("/api/v1/routes/");
             expect(employeeController.getAllEmployees).toHaveBeenCalled();
         });
