@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { HTTP_STATUS } from "src/constants/httpConstants";
-import * as employeeservice from "../services/employeeservices"
+import * as employeeservice from "../services/employeeservices";
 import { Employee } from "../models/employees";
 
  
@@ -78,4 +78,35 @@ export const createEmployee = async (
     } catch (error: unknown) {
         next(error);
     }
+};
+
+/**
+* upadating existing employee data
+* @param req - The express Request
+* @param res  - The express Response
+* @param next - The express middleware chaining function
+*/
+export const updateEmployee = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        // extracting employee id
+        const id: number = Number(req.params.id);
+ 
+        // extracting updated fields 
+        const { name, position, department, email, phone, branchId } = req.body;
+ 
+ 
+        const updatedEmployee: Employee = await employeeservice.updateEmployee(id, { name, position, department, email, phone, branchId });
+ 
+        // sendind successfull response with updated employee data
+        res.status(HTTP_STATUS.OK).json({
+            message: "Employee data updated successfully",
+            data: updatedEmployee,
+        });
+    } catch (error: unknown) {
+        next(error);
+    };
 };
