@@ -101,10 +101,27 @@ export const updateEmployee = async (
  
         const updatedEmployee: Employee = await employeeservice.updateEmployee(id, { name, position, department, email, phone, branchId });
  
-        // sendind successfull response with updated employee data
+        // sending successfull response with updated employee data
         res.status(HTTP_STATUS.OK).json({
             message: "Employee data updated successfully",
             data: updatedEmployee,
+        });
+    } catch (error: unknown) {
+        next(error);
+    };
+};
+
+export const deleteEmployee = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id: number = Number(req.params.id);
+ 
+        await employeeservice.deleteEmployee(id);
+        res.status(HTTP_STATUS.OK).json({
+            message: "Employee deleted successfully",
         });
     } catch (error: unknown) {
         next(error);
