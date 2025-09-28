@@ -1,5 +1,5 @@
 import { Employee } from "../models/employees";
-import { employees } from "src/data/employees";
+import { employees } from '../../../data/employees';
  
  
 /**

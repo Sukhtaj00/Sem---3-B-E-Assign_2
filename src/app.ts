@@ -3,11 +3,14 @@ import express, { Express, Request, Response } from "express";
  
 // Importing morgan
 import morgan from "morgan";
+
+import employeeRoutes from "./api/v1/routes/employeeroutes"
  
 const app: Express = express();
  
 // Use morgan for HTTP request logging
 app.use(morgan("combined"));
+app.use(express.json());
  
  
 // Interface for health check response
@@ -43,5 +46,7 @@ app.get("/api/v1/health", (req: Request, res: Response) => {
  
     res.json(healthData);
 });
+
+app.use("/api/v1/routes", employeeRoutes);
  
 export default app;
